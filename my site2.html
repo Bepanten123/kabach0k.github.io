@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Тёмное фэнтези | Визитка</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=MedievalSharp&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        
+        body {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, #0c0c14 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0d3b8;
+            min-height: 100vh;
+            padding: 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 100%;
+            width: 100%;
+            background: rgba(10, 10, 20, 0.85);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 0 auto;
+            position: relative;
+            border: 1px solid #3a3a4a;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Заголовок и аватар */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #4a3c2a;
+        }
+        
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+        }
+        
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #8a6d3b;
+            box-shadow: 0 0 20px rgba(138, 109, 59, 0.4);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .avatar-frame {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid #c0a672;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        h1 {
+            font-size: 24px;
+            color: #c0a672;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(192, 166, 114, 0.5);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .title {
+            font-size: 14px;
+            color: #9d8c6f;
+            font-style: italic;
+            font-family: 'MedievalSharp', cursive;
+        }
+        
+        /* Био секция */
+        .bio {
+            background: rgba(20, 20, 30, 0.7);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 3px solid #8a6d3b;
+            position: relative;
+        }
+        
+        .bio-text {
+            font-size: 15px;
+            line-height: 1.6;
+            text-align: center;
+            font-family: 'MedievalSharp', cursive;
+        }
+        
+        .bio::before {
+            content: '”';
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            font-size: 40px;
+            color: #8a6d3b;
+            opacity: 0.3;
+            font-family: serif;
+        }
+        
+        /* Ссылки */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background: linear-gradient(to right, #2c1e13, #4a3c2a);
+            color: #e0d3b8;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid #5d4b31;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(192, 166, 114, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .link:hover::before {
+            left: 100%;
+        }
+        
+        .link:active {
+            transform: scale(0.98);
+        }
+        
+        .link i {
+            margin-right: 12px;
+            font-size: 20px;
+            color: #c0a672;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .link-text {
+            flex: 1;
+            font-size: 16px;
+        }
+        
+        /* Музыкальный плеер */
+        .music-player {
+            background: rgba(20, 20, 30, 0.7);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #5d4b31;
+        }
+        
+        .music-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 25px;
+            background: linear-gradient(to right, #5d4b31, #8a6d3b);
+            color: #e0d3b8;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid #c0a672;
+        }
+        
+        .music-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .music-btn i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        /* Счетчик */
+        .counter {
+            text-align: center;
+            font-size: 16px;
+            padding: 15px;
+            background: rgba(20, 20, 30, 0.7);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #5d4b31;
+            position: relative;
+        }
+        
+        .counter-number {
+            font-weight: bold;
+            color: #c0a672;
+            font-size: 22px;
+            display: inline-block;
+            padding: 0 5px;
+            text-shadow: 0 0 8px rgba(192, 166, 114, 0.5);
+        }
+        
+        /* Редактор */
+        .editor-panel {
+            background: rgba(15, 15, 25, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+            border: 1px solid #5d4b31;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .editor-title {
+            text-align: center;
+            color: #c0a672;
+            margin-bottom: 15px;
+            font-size: 18px;
+            text-shadow: 0 0 5px rgba(192, 166, 114, 0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #9d8c6f;
+            font-size: 14px;
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #5d4b31;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(30, 30, 40, 0.8);
+            color: #e0d3b8;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            background: linear-gradient(to right, #5d4b31, #8a6d3b);
+            color: #e0d3b8;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .edit-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #5d4b31;
+            color: #c0a672;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            border: 1px solid #8a6d3b;
+        }
+        
+        .edit-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Футер */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #7a6a4f;
+            padding-top: 15px;
+            border-top: 1px solid #4a3c2a;
+        }
+        
+        /* Анимации */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(192, 166, 114, 0.3); }
+            100% { box-shadow: 0 0 15px rgba(192, 166, 114, 0.6); }
+        }
+        
+        /* Частицы */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(192, 166, 114, 0.3);
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+        
+        /* Адаптивность для очень маленьких экранов */
+        @media (max-width: 340px) {
+            h1 { font-size: 22px; }
+            .link { padding: 14px; }
+            .link-text { font-size: 15px; }
+            .bio-text { font-size: 14px; }
+        }
+        
+        /* Предотвращение zoom при двойном тапе на iOS */
+        input, textarea {
+            font-size: 16px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="edit-btn" id="editToggle">
+            <i class="fas fa-quill"></i>
+        </div>
+        
+        <div class="header">
+            <div class="avatar-container">
+                <img src="https://i.pravatar.cc/300?img=32" alt="Аватар" class="avatar" id="avatarImage">
+                <div class="avatar-frame"></div>
+            </div>
+            <h1 id="userName">Морганa Лефей</h1>
+            <div class="title" id="userTitle">Владычица Тёмного Леса</div>
+        </div>
+        
+        <div class="bio" id="bioSection">
+            <p class="bio-text" id="bioText">Приветствую, путник. Я хранительница древних знаний и тайн тёмного леса. Моя магия пронизывает каждую травинку и каждое дерево в этих землях. Остерегайся, но не бойся — те, кто уважает природу, всегда найдут у меня приют.</p>
+        </div>
+        
+        <div class="links">
+            <a href="#" class="link" id="telegramLink">
+                <i class="fab fa-telegram"></i>
+                <span class="link-text" id="telegramText">Магический скролл</span>
+            </a>
+            <a href="#" class="link" id="instagramLink">
+                <i class="fab fa-instagram"></i>
+                <span class="link-text" id="instagramText">Зеркало истины</span>
+            </a>
+            <a href="#" class="link" id="vkLink">
+                <i class="fab fa-vk"></i>
+                <span class="link-text" id="vkText">Хроники ВК</span>
+            </a>
+        </div>
+        
+        <div class="music-player">
+            <a href="#" class="music-btn" id="musicLink">
+                <i class="fas fa-music"></i>
+                <span id="musicText">Песнь дракона</span>
+            </a>
+        </div>
+        
+        <div class="counter">
+            <p>Это место посетили <span class="counter-number" id="visitCount">0</span> раз</p>
+        </div>
+        
+        <div class="editor-panel" id="editorPanel">
+            <div class="editor-title">Редактирование свитка</div>
+            
+            <div class="form-group">
+                <label for="avatarInput">Ссылка на образ:</label>
+                <input type="text" id="avatarInput" placeholder="URL вашего изображения">
+            </div>
+            
+            <div class="form-group">
+                <label for="nameInput">Ваше имя:</label>
+                <input type="text" id="nameInput" placeholder="Введите ваше имя">
+            </div>
+            
+            <div class="form-group">
+                <label for="titleInput">Ваш титул:</label>
+                <input type="text" id="titleInput" placeholder="Введите ваш титул">
+            </div>
+            
+            <div class="form-group">
+                <label for="bioInput">Ваша история:</label>
+                <textarea id="bioInput" placeholder="Расскажите о себе"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="telegramInput">Ссылка на Telegram:</label>
+                <input type="text" id="telegramInput" placeholder="https://t.me/ваш_аккаунт">
+            </div>
+            
+            <div class="form-group">
+                <label for="instagramInput">Ссылка на Instagram:</label>
+                <input type="text" id="instagramInput" placeholder="https://instagram.com/ваш_аккаунт">
+            </div>
+            
+            <div class="form-group">
+                <label for="vkInput">Ссылка на ВКонтакте:</label>
+                <input type="text" id="vkInput" placeholder="https://vk.com/ваш_аккаунт">
+            </div>
+            
+            <div class="form-group">
+                <label for="musicInput">Ссылка на песнь:</label>
+                <input type="text" id="musicInput" placeholder="Ссылка на вашу музыку">
+            </div>
+            
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn" id="saveBtn">Сохранить</button>
+                <button class="btn" id="cancelBtn" style="background: linear-gradient(to right, #3a2c1f, #5d4b31);">Отмена</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Создано магией 💀 | Год дракона</p>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация данных в стиле dark fantasy
+        let userData = {
+            avatar: "https://i.pravatar.cc/300?img=32",
+            name: "Морганa Лефей",
+            title: "Владычица Тёмного Леса",
+            bio: "Приветствую, путник. Я хранительница древних знаний и тайн тёмного леса. Моя магия пронизывает каждую травинку и каждое дерево в этих землях. Остерегайся, но не бойся — те, кто уважает природу, всегда найдут у меня приют.",
+            telegram: "#",
+            instagram: "#",
+            vk: "#",
+            music: "#",
+            telegramText: "Магический скролл",
+            instagramText: "Зеркало истины",
+            vkText: "Хроники ВК",
+            musicText: "Песнь дракона"
+        };
+
+        // Загрузка сохраненных данных
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedData();
+            setupEventListeners();
+            initializeCounter();
+            createParticles();
+            
+            // Предотвращение масштабирования на iOS
+            document.addEventListener('touchstart', function(event) {
+                if (event.touches.length > 1) {
+                    event.preventDefault();
+                }
+            }, { passive: false });
+            
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function(event) {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+        });
+
+        // Загрузка сохраненных данных
+        function loadSavedData() {
+            const savedData = localStorage.getItem('userProfileData');
+            if (savedData) {
+                userData = JSON.parse(savedData);
+            }
+            updateUI();
+        }
+
+        // Обновление интерфейса
+        function updateUI() {
+            document.getElementById('avatarImage').src = userData.avatar;
+            document.getElementById('userName').textContent = userData.name;
+            document.getElementById('userTitle').textContent = userData.title;
+            document.getElementById('bioText').textContent = userData.bio;
+            document.getElementById('telegramLink').href = userData.telegram;
+            document.getElementById('instagramLink').href = userData.instagram;
+            document.getElementById('vkLink').href = userData.vk;
+            document.getElementById('musicLink').href = userData.music;
+            document.getElementById('telegramText').textContent = userData.telegramText;
+            document.getElementById('instagramText').textContent = userData.instagramText;
+            document.getElementById('vkText').textContent = userData.vkText;
+            document.getElementById('musicText').textContent = userData.musicText;
+        }
+
+        // Настройка обработчиков событий
+        function setupEventListeners() {
+            // Кнопка редактирования
+            document.getElementById('editToggle').addEventListener('click', function() {
+                const editorPanel = document.getElementById('editorPanel');
+                if (editorPanel.style.display === 'block') {
+                    editorPanel.style.display = 'none';
+                } else {
+                    // Заполняем форму текущими данными
+                    document.getElementById('avatarInput').value = userData.avatar;
+                    document.getElementById('nameInput').value = userData.name;
+                    document.getElementById('titleInput').value = userData.title;
+                    document.getElementById('bioInput').value = userData.bio;
+                    document.getElementById('telegramInput').value = userData.telegram;
+                    document.getElementById('instagramInput').value = userData.instagram;
+                    document.getElementById('vkInput').value = userData.vk;
+                    document.getElementById('musicInput').value = userData.music;
+                    editorPanel.style.display = 'block';
+                }
+            });
+
+            // Кнопка сохранения
+            document.getElementById('saveBtn').addEventListener('click', function() {
+                // Сохраняем данные из формы
+                userData.avatar = document.getElementById('avatarInput').value;
+                userData.name = document.getElementById('nameInput').value;
+                userData.title = document.getElementById('titleInput').value;
+                userData.bio = document.getElementById('bioInput').value;
+                userData.telegram = document.getElementById('telegramInput').value;
+                userData.instagram = document.getElementById('instagramInput').value;
+                userData.vk = document.getElementById('vkInput').value;
+                userData.music = document.getElementById('musicInput').value;
+
+                // Сохраняем в localStorage
+                localStorage.setItem('userProfileData', JSON.stringify(userData));
+
+                // Обновляем интерфейс
+                updateUI();
+
+                // Скрываем панель редактора
+                document.getElementById('editorPanel').style.display = 'none';
+            });
+
+            // Кнопка отмены
+            document.getElementById('cancelBtn').addEventListener('click', function() {
+                document.getElementById('editorPanel').style.display = 'none';
+            });
+
+            // Редактирование по клику на элементы
+            document.getElementById('avatarImage').addEventListener('click', function() {
+                document.getElementById('editToggle').click();
+            });
+
+            document.getElementById('userName').addEventListener('click', function() {
+                document.getElementById('editToggle').click();
+            });
+
+            document.getElementById('bioSection').addEventListener('click', function() {
+                document.getElementById('editToggle').click();
+            });
+        }
+
+        // Счетчик посещений
+        function initializeCounter() {
+            let count = localStorage.getItem('visitCount');
+            if (count === null) {
+                count = 0;
+            } else {
+                count = parseInt(count);
+            }
+            count++;
+            localStorage.setItem('visitCount', count);
+            
+            // Анимация увеличения счетчика
+            animateCounter(0, count, 1500);
+        }
+
+        function animateCounter(start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                document.getElementById('visitCount').textContent = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Создаем частицы для фона
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Случайные свойства
+                const size = Math.random() * 4 + 1;
+                const posX = Math.random() * 100;
+                const duration = Math.random() * 10 + 5;
+                const delay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}vw`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+    </script>
+</body>
+</html>
